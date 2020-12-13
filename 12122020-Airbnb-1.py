@@ -8,7 +8,7 @@
 
 # Follow-up: Can you do this in O(N) time and constant space?
 
-# Version 1, O(N^2) with dynamic programing
+# Version 1, O(N), linear space with dynamic programing
 def max_na_sum(s):
     if len(s) <= 2:
         return max(s)
@@ -21,20 +21,19 @@ def max_na_sum(s):
         result[1] = s[0]
         last = False # check to see the last 
     for i in range(2, len(s)):
-        tmp = 0
+        temp = 0
         if last:
-            tmp = result[i-1] 
+            temp = result[i-1] 
             last = False
         else:
-            tmp = result[i-1] + s[i]
+            temp = result[i-1] + s[i]
             last = True
-        
-        for j in range(i-1):
-            if result[j] + s[i] > tmp:
-                tmp = result[j] + s[i]
-                last = True        
-        result[i] = max
-    return result
+        if (result[i-2] + s[i]) > temp:
+            temp = result[i -2] + s[i]
+            last = True        
+        result[i] = temp
+    return result[i]
+
 
 def main():
     print('This is a problem form Airbnb on 12/12/2020')
