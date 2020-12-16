@@ -7,6 +7,7 @@
 # characters is "bcb".
 
 def longest_substring(s,k):
+    # code go here currently I can only think of a quick O(n^2)
     return 0
 
 def main():
