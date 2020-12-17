@@ -30,6 +30,16 @@ def dfs(node):
     if node.right != None:
         dfs(node.right)
 
+def count_universal(node):
+    if node.left == None and node.right == None:
+        return 1
+    else:
+        count = 0
+        if node.left != None and node.right != None and node.left.value == node.right.value:
+            count =1
+        
+        return count + count_universal(node.left) + count_universal(node.right)
+
 
 
 def main():
@@ -39,6 +49,9 @@ def main():
 
     # dfs to test tree
     dfs(root)
+
+    # test run:
+    print("Result = {}".format(count_universal(root)))
 
 
 
