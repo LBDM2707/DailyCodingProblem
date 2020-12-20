@@ -30,18 +30,6 @@ def dfs(node):
     if node.right != None:
         dfs(node.right)
 
-<<<<<<< Updated upstream
-def count_universal(node):
-    if node.left == None and node.right == None:
-        return 1
-    else:
-        count = 0
-        if node.left != None and node.right != None and node.left.value == node.right.value:
-            count =1
-        
-        return count + count_universal(node.left) + count_universal(node.right)
-
-=======
 def count_univ_value(node):
     if node.left == None and node.right == None:
         return 1
@@ -50,7 +38,6 @@ def count_univ_value(node):
         if (node.left is not None) and (node.right is not None) and  node.left.value == node.right.value:
             tmp = 1
         return tmp + (count_univ_value(node.left) if node.left is not None else 0) +  (count_univ_value(node.right) if node.right is not None else 0)
->>>>>>> Stashed changes
 
 
 def main():
@@ -63,6 +50,7 @@ def main():
 
     # test func:
     print(count_univ_value(root))
+
 
     # test run:
     print("Result = {}".format(count_universal(root)))
