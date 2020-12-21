@@ -1,7 +1,7 @@
 # This problem was asked by Google.
 
 # Given an array of integers and a number k, where 1 <= k <= length of the array,
-#  compute the maximum values of each subarray of length k.
+# compute the maximum values of each subarray of length k.
 
 # For example, given 
 # array = [10, 5, 2, 7, 8, 7] 
@@ -15,3 +15,14 @@
 # Do this in O(n) time and O(k) space. You can modify the input array in-place
 # and you do not need to store the results. You can simply print them out as
 # you compute them.
+
+# O(n^2) - zero space
+def print_maxs(arr, k):    
+    for i in range(len(arr)-k+1):
+        print("{} = max({})".format(max(arr[i:i+k]),arr[i:i+k]))
+
+# O(n) time and O(k) space
+
+
+
+print_maxs([10, 5, 2, 7, 8, 7], 4)
