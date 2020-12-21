@@ -34,7 +34,7 @@
 # is 32 (not including the double quotes).
 
 # Given a string representing the file system in the above format, return the 
-# ength of the longest absolute path to a file in the abstracted file system. 
+# length of the longest absolute path to a file in the abstracted file system. 
 # If there is no file in the system, return 0.
 
 # Note:
@@ -42,3 +42,46 @@
 # The name of a file contains at least a period and an extension.
 
 # The name of a directory or sub-directory will not contain a period.
+
+
+# Check file name regex
+import re
+def is_file(file_name):
+    file_pattern = "^[a-z0-9A-Z]+\.[a-z0-9A-Z]+$"
+    return bool(re.match(file_pattern, file_name))
+
+def get_longest_path(s):
+    prep_data = s.split("\n")
+    max = 0
+    memory = []
+    curr_level = -1
+    for item in prep_data:
+        # get level & value
+        level = 0
+        while len(item) > 1 and item[:1] == "\t":
+            item = item[1:]
+            level += 1 
+        value = len(item) + (1 if level > 0 else 0)
+        is_filename = is_file(item)
+        # assess node
+        if level > curr_level:
+            curr_level = level
+            memory.append(value)  
+        else: # level is less than or equal curr level            
+            curr_level = level
+            memory[curr_level] = value
+        
+        # check if for path length
+        if is_filename:
+            temp = sum([memory[x] for x in range(0, curr_level)]) + value
+            max = temp if temp > max else max
+    return max
+    
+
+    
+test_string = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
+print(get_longest_path(test_string))
+
+
+
+
