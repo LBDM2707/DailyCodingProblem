@@ -21,10 +21,13 @@ class LinkedList:
             self.next_node = next
 
     head = None
+    size = None
     def __init__(self, head=None):
         self.head = head
+        self.size = 1 if head != None else 0
 
     def append(self, value):
+        self.size += 1
         if self.head == None:
             self.head = self.Node(value=value) 
         else:
@@ -48,10 +51,13 @@ class LinkedList:
 def find_intersect(linklist1, linklist2):
     temp1 = linklist1.head
     temp2 = linklist2.head
-    while temp1.value != temp2.value:
+    terminal = linklist1.size * linklist2.size
+    count = 0
+    while temp1.value != temp2.value and count <= terminal:
         temp1 = temp1.next_node if temp1.next_node != None else linklist1.head    
         temp2 = temp2.next_node if temp2.next_node != None else linklist2.head
-    return temp1.value
+        count += 1
+    return temp1.value if temp1 == temp2 else None
 
 
 # init problem
