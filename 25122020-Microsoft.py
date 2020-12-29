@@ -15,13 +15,27 @@
 from unittest import TestCase
 
 def break_sentence(sentence, words_dict):
-    return []
+    result = []
+
+    converted_dict ={}
+    for word in words_dict:
+        converted_dict[word] = 1
+
+    temp = ""
+    while len(sentence) > 0:
+        char = sentence[0]
+        sentence = sentence[1:]
+        temp += char
+        if temp in converted_dict:
+            result.append(temp)
+            temp = ""  
+    return result
 
 #Test 1
 print("Case 1======================")
 words_dict = ['bed', 'bath', 'bedbath', 'and', 'beyond']
 sentence = "bedbathandbeyond"
-result = ['the', 'quick', 'brown', 'fox']
+result = ['bed', 'bath', 'and', 'beyond']
 print("Expected = {}".format(result))
 print("Actual   = {}".format(break_sentence(sentence,words_dict)))
 
@@ -29,6 +43,6 @@ print("Actual   = {}".format(break_sentence(sentence,words_dict)))
 print("\nCase 2======================")
 words_dict = ['quick', 'brown', 'the', 'fox']
 sentence = "thequickbrownfox"
-result = ['bed', 'bath', 'and', 'beyond']
+result = ['the', 'quick', 'brown', 'fox']
 print("Expected = {}".format(result))
 print("Actual   = {}".format(break_sentence(sentence,words_dict)))
