@@ -43,16 +43,17 @@ def finding_path(maze, step, current, stop):
         else:
             min = step if min > step else min
     else:
-        x = current[0]
-        y = current[1]
-        if valid_move(maze, (x+1, y)):
-            finding_path(maze, step+1, (x+1, y),stop)
-        if valid_move(maze, (x-1, y)):
-            finding_path(maze, step+1, (x-1, y),stop)
-        if valid_move(maze, (x, y+1)):
-            finding_path(maze, step+1, (x, y+1),stop)
-        if valid_move(maze, (x, y-1)):
-            finding_path(maze, step+1, (x, y-1),stop)
+        if (min is None) or (min is not None and step < min):
+            x = current[0]
+            y = current[1]
+            if valid_move(maze, (x+1, y)):
+                finding_path(maze, step+1, (x+1, y),stop)
+            if valid_move(maze, (x-1, y)):
+                finding_path(maze, step+1, (x-1, y),stop)
+            if valid_move(maze, (x, y+1)):
+                finding_path(maze, step+1, (x, y+1),stop)
+            if valid_move(maze, (x, y-1)):
+                finding_path(maze, step+1, (x, y-1),stop)
 
 start = (3,0)
 stop = (0,0)
