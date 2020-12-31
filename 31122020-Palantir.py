@@ -22,3 +22,32 @@
 # ["the  quick brown", # 1 extra space on the left
 # "fox  jumps  over", # 2 extra spaces distributed evenly
 # "the   lazy   dog"] # 4 extra spaces distributed evenly
+
+def create_line(temp,count, k):
+    
+    return temp
+
+
+def justify_texts(s, k):
+    temp_line = []
+    temp_sum = 0
+    result = []
+    for word in s:
+        if temp_sum + len(word) + 1 <= k:
+            temp_line.append(word)
+            temp_sum += 1 + len(word)
+        else:
+            # Created new line from temp
+            result.append(create_line(temp_line, temp_sum, k))
+            # Append word to new temp
+            temp_line = []
+            temp_sum = 0
+            temp_line.append(word)
+            temp_sum += len(word)
+    if temp_sum > 0:
+        result.append(create_line(temp_line, temp_sum, k))
+    return result
+
+test = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+k = 16
+print(justify_texts(test,k))
