@@ -23,12 +23,10 @@ class LockingBinaryTree:
         def __init__(self, value=None):
             self.parent = None
             self.value = value
-            self.left = left
-            self.right = right
-            self.is_locked = False
+            self.locked = False
 
         def is_locked(self):
-            return self.is_locked
+            return self.locked
 
         def check_condition(self):
             condition = True
@@ -53,13 +51,13 @@ class LockingBinaryTree:
 
         def lock(self):
             if self.check_condition:
-                self.is_locked = True
+                self.locked = True
                 return True
             return False
 
         def unlock(self):
             if self.check_condition:
-                self.is_locked = False
+                self.locked = False
                 return True
             return False
     
