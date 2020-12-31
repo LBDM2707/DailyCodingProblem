@@ -23,9 +23,20 @@
 # "fox  jumps  over", # 2 extra spaces distributed evenly
 # "the   lazy   dog"] # 4 extra spaces distributed evenly
 
-def create_line(temp,count, k):
-    
-    return temp
+def create_line(temp,sum, k):
+    space_count = k - (sum - (len(temp) - 1))
+    avg_space = int(space_count / (len(temp) - 1))
+    xtra_space = space_count % (len(temp) - 1)    
+    result = temp[0]
+    for word in temp[1:]:
+        spaces = avg_space
+        if xtra_space > 0:
+            spaces += 1
+            xtra_space -= 1
+        for i in range(spaces):
+            result += ' '
+        result += word
+    return result
 
 
 def justify_texts(s, k):
@@ -35,19 +46,20 @@ def justify_texts(s, k):
     for word in s:
         if temp_sum + len(word) + 1 <= k:
             temp_line.append(word)
-            temp_sum += 1 + len(word)
+            temp_sum += len(word) +(1 if temp_sum != 0 else 0)
         else:
             # Created new line from temp
             result.append(create_line(temp_line, temp_sum, k))
             # Append word to new temp
             temp_line = []
-            temp_sum = 0
             temp_line.append(word)
-            temp_sum += len(word)
+            temp_sum = len(word)
     if temp_sum > 0:
         result.append(create_line(temp_line, temp_sum, k))
     return result
 
 test = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
 k = 16
-print(justify_texts(test,k))
+result = justify_texts(test,k)
+for line in result:
+    print("{} (len = {})".format(line, len(line)))
